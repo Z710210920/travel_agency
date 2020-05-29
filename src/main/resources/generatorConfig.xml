@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+    <!DOCTYPE generatorConfiguration    
+     PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"    
+     "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">    
+    <generatorConfiguration>    
+        <context id="DB2Tables"  targetRuntime="MyBatis3">    
+            <commentGenerator>    
+                <property name="suppressDate" value="true"/>    
+                <!-- 是否去除自动生成的注释 true：是 ： false:否 -->    
+                <property name="suppressAllComments" value="false"/>    
+            </commentGenerator>    
+            <!--数据库链接URL，用户名、密码 -->    
+            <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/travel_agency?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT&amp;useSSL=true" userId="root" password="981019">    
+            </jdbcConnection>    
+            <javaTypeResolver>    
+                <property name="forceBigDecimals" value="false"/>    
+            </javaTypeResolver>    
+            <!-- 生成模型的包名和位置，targetPackage用于设置存放的包，targetProject请填写成项目名-->    
+            <javaModelGenerator targetPackage="com.ssm.entity" targetProject="travel_agency/src/main/java">    
+                <property name="enableSubPackages" value="true"/>    
+                <property name="trimStrings" value="true"/>    
+            </javaModelGenerator>    
+            <!-- 生成映射文件的包名和位置，targetPackage用于设置存放的包，targetProject请填写成项目名-->    
+            <sqlMapGenerator targetPackage="mapper" targetProject="travel_agency/src/main/resources">    
+                <property name="enableSubPackages" value="true"/>    
+            </sqlMapGenerator>    
+            <!-- 生成DAO的包名和位置，targetPackage用于设置存放的包，targetProject请填写成项目名-->    
+            <javaClientGenerator type="XMLMAPPER" targetPackage="com.ssm.dao" targetProject="travel_agency/src/main/java">    
+                <property name="enableSubPackages" value="true"/>    
+            </javaClientGenerator>    
+            <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->    
+            <table tableName="city" domainObjectName="City" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> 
+            <table tableName="contact" domainObjectName="Contact" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+            <table tableName="place" domainObjectName="Place" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+            <table tableName="tours_group" domainObjectName="Tours_group" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+            <table tableName="tours_guide" domainObjectName="Tours_guide" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+            <table tableName="tours_route" domainObjectName="Tours_route" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+            <table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table> 
+        </context>    
+    </generatorConfiguration>
