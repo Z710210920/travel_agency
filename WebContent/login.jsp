@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.ssm.entity.*"%>
+<%@page import="com.dao.*"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -74,7 +75,7 @@ c.innerHTML=no;
 <script type="text/javascript" src="../js/verfyUtil.js" charset="gbk"></script>
 </head>
 <body>
-					<form  name="f1" method="post" action="user.login" target="_top" onsubmit="return ck()" enctype="multipart/form-data">
+					<form  name="f1" method="post" action="user!login" target="_top" onsubmit="return ck()" enctype="multipart/form-data">
 				
 						<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#BBD3EB">
                           	<tr>
