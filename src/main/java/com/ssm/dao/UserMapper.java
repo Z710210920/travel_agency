@@ -1,5 +1,7 @@
 package com.ssm.dao;
 
+import java.util.List;
+
 import com.ssm.entity.User;
 import com.ssm.entity.UserWithBLOBs;
 
@@ -40,4 +42,8 @@ public interface UserMapper {
 	 * @mbg.generated
 	 */
 	int updateByPrimaryKey(User record);
+	
+	List<User> selectall();
+	
+	User selectByname(String name);
 }

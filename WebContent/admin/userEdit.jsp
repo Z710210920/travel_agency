@@ -83,12 +83,13 @@ c.innerHTML=no;
 <script type="text/javascript" src="../js/verfyUtil.js" charset="gbk"></script>
 </head>
 <body>
-					<form  name="f1" id = "f1" method="get" action="getalluser.do">
+					<form  id = "f1" name="f1" onsubmit="return false"action="getalluser.do" method="get">
 				
 						<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#BBD3EB">
+						<input type="hidden" id="id" name="id" value="${user.id}"/>
                           	<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">姓名</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="name" name="name" value=""/></td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="name" name="name" value="${user.name}"/></td>
     						</tr>
                          	<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">密码</td>
@@ -96,50 +97,42 @@ c.innerHTML=no;
     						</tr>
                      		<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">性别</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="sex" name="sex" value=""/>只允许输入数字</td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="sex" name="sex" value="${user.sex}"/>只允许输入数字</td>
     						</tr>
     						<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">省份</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="province" name="province" value=""/>只允许输入数字</td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="province" name="province" value="${user.province}"/>只允许输入数字</td>
     						</tr>
     						<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">城市</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="city" name="city" value=""/>只允许输入数字</td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="city" name="city" value="${user.city}"/>只允许输入数字</td>
     						</tr>
     						<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">住址</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="address" name="address" value=""/>只允许输入数字</td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="address" name="address" value="${user.address}"/>只允许输入数字</td>
     						</tr>
     						<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">电话</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="phone" name="phone" value=""/>只允许输入数字</td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="phone" name="phone" value="${user.phone}"/>只允许输入数字</td>
     						</tr>
     						<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">身份证号</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="idnumber" name="idnumber" value=""/>只允许输入数字</td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="idnumber" name="idnumber" value="${user.idnumber}"/>只允许输入数字</td>
     						</tr>				
     						<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">朋友电话</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="frPhoneNunber" name="frPhoneNunber" value=""/>只允许输入数字</td>
-    						</tr>	
-    						<tr>
-                            	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">用户类型</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;
-									<input type="radio" id="user" name="grand" value="1" checked/>普通用户
-									<input type="radio" id="Salesman" name="grand" value="3"/>业务员
-								</td>
-    						</tr>				
-    			
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="frPhoneNunber" name="frPhoneNunber" value="${user.frPhoneNunber}"/>只允许输入数字</td>
+    						</tr>
     						<tr>
     							<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF"></td>
-    							<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="button" value="提交" onclick="ADDUSER()"/><input type="reset" value="重置"/></td>
+    							<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="button" value="提交" onclick = "EDITUSER()"/><input type="reset" value="重置"/></td>
     						</tr>
                             <script type="text/javascript">
-                            function ADDUSER() {
+                            function EDITUSER() {
                             	var data = $("#f1").serialize();
                                 $.ajax({
                                     type: "POST",
-                                    url: "${pageContext.request.contextPath}/userAdd.do",
+                                    url: "${pageContext.request.contextPath}/update_user.do",
                                     dataType: "json",//预期服务器返回的数据类型
                                     data: data,
                                     processData:false,
@@ -147,12 +140,12 @@ c.innerHTML=no;
                                     success: function (result) {
                                         console.log(result);
                                         if (result.result == "true") {
-                                            alert("注册成功！");
-                                            location.href="getalluser.do";
+                                            alert("修改成功！");
+                                            location.href="/about.jsp";
                                         }
                                     },
                                     error: function() {
-                                        alert("注册失败！请重试");
+                                        alert("修改失败！请重试");
                                     }
                                 });
                             }

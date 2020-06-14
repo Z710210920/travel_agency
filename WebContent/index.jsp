@@ -65,8 +65,14 @@ c.innerHTML=no;
 <script language="javascript" type="text/javascript">
 </script>
 <%
-User user = (User)session.getAttribute("user"); 
-String roletype="用户";//替换user.getRole().equals("管理员")
+User user = (User)request.getAttribute("user"); 
+String roletype;
+if(user!=null){
+	roletype=user.getGrand().toString();//替换user.getRole().equals("管理员")
+}
+else{
+	roletype="1";
+}
  %>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -81,12 +87,13 @@ String roletype="用户";//替换user.getRole().equals("管理员")
         <tr id="4@1">
           <td align="right">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            	<%if(user!=null){ %>	    	   
-		        	<a href="login.jsp" class="font2" target="main"><strong>&nbsp;&nbsp;当前登录：<%=user.getName() %> |</strong></a>
-		        	<a href="user!quit"  class="font2" target="_top"><strong>&nbsp;&nbsp;退出</strong></a>
+            	<%if(user!=null){ %>	    
+            		<a href="about.jsp"  class="font2" target="main"><strong>&nbsp;&nbsp;首页</strong></a>	   
+		        	<a href="${pageContext.request.contextPath }/getUser.do?id=${user.id }&grand=1" class="font2" target="main"><strong>&nbsp;&nbsp;当前登录：<%=user.getName() %> |</strong></a>
+		        	<a href="index.jsp"  class="font2" target="_top"><strong>&nbsp;&nbsp;退出</strong></a>
 		        	<%}else{ %>
-		        	<a href="user!register1.action" class="font2" target="main"><strong>&nbsp;&nbsp;注册</strong></a>&nbsp;
-					<a href="user!login1.action" class="font2" target="main"><strong>&nbsp;&nbsp;登录</strong></a>&nbsp;
+		        	<a href="register.jsp" class="font2" target="main"><strong>&nbsp;&nbsp;注册</strong></a>&nbsp;
+					<a href="login.jsp" class="font2" target="main"><strong>&nbsp;&nbsp;登录</strong></a>&nbsp;
 				<%} %>
             	</td>
               </tr>
@@ -112,7 +119,7 @@ String roletype="用户";//替换user.getRole().equals("管理员")
                  
                   <table width="230" border="0" cellpadding="0" cellspacing="5">
                     
-                    <%if(roletype.equals("用户")) {%>
+                    <%if(roletype.equals("1")) {%>
                     <tr  onClick="show('1')" style="cursor: hand" >
                       <td width="12%" align="center"><img src="/travel_agency/admin/images/index1_54.gif" width="15" height="11" /></td>
                       <td width="88%">旅行管理</td>
@@ -152,9 +159,9 @@ String roletype="用户";//替换user.getRole().equals("管理员")
                             <td width="82%"><a href="user!login1.action" target="main">订单查询</a></td>
                           </tr>
 							<%} %>
-                          <tr onClick="change('旅行管理 > 联系我们')" style="cursor: hand" >
+                          <tr onClick="change('旅行管理 > 旅行论坛')" style="cursor: hand" >
                             <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
-                            <td width="82%"><a href="contact.jsp" target="main">用户留言</a></td>
+                            <td width="82%"><a href="getallpost.do?userName=${user.name}" target="main">旅行论坛</a></td>
                           </tr>
                         </table>
                       </td>
@@ -208,7 +215,7 @@ String roletype="用户";//替换user.getRole().equals("管理员")
                       <%if(roletype.equals("客户经理")){ %>
                        <iframe width="100%"  scrolling="yes" frameborder="0" height="340" src="admin/customer.jsp"  style=background:transparent allowtransparency name="main"></iframe>  
                        <%}else{ %>
-                       <iframe width="100%"  scrolling="yes" frameborder="0" height="340" src="admin/user.jsp"  style=background:transparent allowtransparency name="main"></iframe>  
+                       <iframe width="100%"  scrolling="yes" frameborder="0" height="340" src="about.jsp"  style=background:transparent allowtransparency name="main"></iframe>  
                      	<%} %>
                      </td>
                     </tr>

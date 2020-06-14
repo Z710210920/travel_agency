@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.dao.User"%>
+<%@page import="com.ssm.entity.User"%>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -87,7 +89,6 @@ var timeID=setTimeout(showLeftTime,1000);
 //-->
 </script>
 <%
-User user = (User)session.getAttribute("user"); 
 String roletype="管理员";//替换user.getRole().equals("用户")
  %>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -141,12 +142,12 @@ String roletype="管理员";//替换user.getRole().equals("用户")
                    
                           <tr onClick="change('系统管理 > 用户管理')" style="cursor: hand" >
                             <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
-                            <td width="82%"><a href="user!userList" target="main">用户管理</a></td>
+                            <td width="82%"><a href="getalluser.do" target="main">用户管理</a></td>
                           </tr>
                           
-                          <tr onClick="change('系统管理 > 用户留言')" style="cursor: hand" >
+                          <tr onClick="change('系统管理 > 论坛管理')" style="cursor: hand" >
                             <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
-                            <td width="82%"><a href="contact!contactList" target="main">用户留言</a></td>
+                            <td width="82%"><a href="getallpost.do?userName=admin" target="main">旅行论坛</a></td>
                           </tr>
                        
                         </table>
@@ -161,28 +162,43 @@ String roletype="管理员";//替换user.getRole().equals("用户")
                       <td align="center"></td>
                       <td>
                         <table width="100%" border="0" cellspacing="5" cellpadding="0">
-                          <tr onClick="change('景点管理 > 城市列表')" style="cursor: hand" >
+                          <tr onClick="change('旅游资源管理 > 城市列表')" style="cursor: hand" >
                             <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
-                            <td width="82%"><a href="toursCity" target="main">城市列表</a></td>
+                            <td width="82%"><a href="city.jsp" target="main">城市列表</a></td>
                           </tr>
-                          <tr onClick="change('景点管理 > 景点资源')" style="cursor: hand" >
+                          <tr onClick="change('旅游资源管理 > 景点资源')" style="cursor: hand" >
                             <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
-                            <td width="82%"><a href="toursPlace!placeList" target="main">景点资源</a></td>
+                            <td width="82%"><a href="place.jsp" target="main">景点资源</a></td>
                           </tr>
-                          <tr onClick="change('景点管理 > 旅游路线')" style="cursor: hand" >
+                          <tr onClick="change('旅游资源管理 > 旅游路线')" style="cursor: hand" >
                             <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
-                            <td width="82%"><a href="toursRoute!routeList" target="main">旅游路线</a></td>
+                            <td width="82%"><a href="travel_route_admin.jsp" target="main">旅游路线</a></td>
                           </tr>
                          
-                          <tr onClick="change('景点管理> 导游信息')" style="cursor: hand" >
+                          <tr onClick="change('旅游资源管理> 导游信息')" style="cursor: hand" >
                             <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
-                            <td width="82%"><a href="toursGuide!guideList" target="main">导游信息</a></td>
+                            <td width="82%"><a href="guide.jsp" target="main">导游信息</a></td>
                            </tr>
                            
-                           <tr onClick="change('景点管理> 团队信息')" style="cursor: hand" >
+                           <tr onClick="change('旅游资源管理> 订单信息')" style="cursor: hand" >
                             <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
-                            <td width="82%"><a href="toursGroup!groupList" target="main">团队信息</a></td>
+                            <td width="82%"><a href="ding.jsp" target="main">订单信息</a></td>
                            </tr>
+                   
+                        </table>
+                      </td>
+                    </tr>
+                    <tr  onClick="show('5')" style="cursor: hand" >
+                      <td width="12%" align="center"><img src="/travel_agency/admin/images/index1_54.gif" width="15" height="11" /></td>
+                      <td width="88%">业务员管理</td>
+                    	<tr id="5@1">
+                      <td align="center"></td>
+                      <td>
+                        <table width="100%" border="0" cellspacing="5" cellpadding="0">
+                          <tr onClick="change('业务员管理 > 业务员列表')" style="cursor: hand" >
+                            <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
+                            <td width="82%"><a href="salesman_MGT.jsp" target="main">业务员列表</a></td>
+                          </tr>
                    
                         </table>
                       </td>
@@ -233,11 +249,7 @@ String roletype="管理员";//替换user.getRole().equals("用户")
                     </tr>
                     <tr>
                       <td>
-                      <%if(roletype.equals("客户经理")){ %>
-                       <iframe width="100%"  scrolling="yes" frameborder="0" height="340" src="admin/customer.jsp"  style=background:transparent allowtransparency name="main"></iframe>  
-                       <%}else{ %>
-                       <iframe width="100%"  scrolling="yes" frameborder="0" height="340" src="admin/user.jsp"  style=background:transparent allowtransparency name="main"></iframe>  
-                     	<%} %>
+                       <iframe width="100%"  scrolling="yes" frameborder="0" height="340" src="getalluser.do"  style=background:transparent allowtransparency name="main"></iframe>  
                      </td>
                     </tr>
                 </table>                </td>

@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.dao.User"%>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -15,42 +14,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 <body>
-<% User user = (User)session.getAttribute("user"); %>
-   <div class="header-top">
-	<div class="wrap">
-			<div class="logo">
-				<a href="index.html"><img src="./images/logo.png" alt=""/></a>
-			</div>
-	    <ul class="follow_icon">
-	    <%if(user!=null){ %>
-	   	    <li><a href="toursGroup!userPlan" style="opacity: 2;"><span style="color:white">[订单]</span></a></li>
-	        <li><a href="login.jsp" style="opacity: 1;"><span style="color:white">当前登录：<%=user.getName() %> |</span></a></li>
-	        <li><a href="user!quit" style="opacity: 1;"><span style="color:white">退出</span></a></li>
-	        <%}else{ %>
-	        <li><a href="login.jsp" style="opacity: 1;"><span style="color:white">登陆 |</span></a></li>
-			<li><a href="register.jsp" style="opacity: 1;"><span style="color:white">注册</span></a></li>
-			<%} %>
-		</ul>
-		 <div class="clear"></div>
-	</div>
-   </div>
-   <div class="header-bottom"> 
-		<div class="wrap"> 
-			  <div class="subMenu1 smint">
- 	           	 <div class="inner">
-					<ul>
-						<li> <a href="index.jsp" id="sTop" class="subNavBtn">主页</a> </li>
-						<li class="active"> <a href="about.jsp" id="s1" class="subNavBtn">关于</a> </li>
-						<li> <a href="toursRoute" id="s2" class="subNavBtn">旅游路线</a> </li>
-						<li> <a href="toursGuide" id="s4" class="subNavBtn">导游信息</a> </li>
-						<li> <a href="contact.jsp" id="s3" class="subNavBtn">联系我们</a> </li>
-					    <div class="clear"></div>
-					 </ul>
-				  </div>
-				</div>
-			    <div class="clear"></div>
-			</div>
-	  </div>   
  <div class="main">
 	<div class="wrap">
 		<div class="heading">

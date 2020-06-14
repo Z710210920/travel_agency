@@ -1,13 +1,22 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.dao.*"%>
-<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@page import="com.ssm.entity.User"%>
+<%@ page isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>注册页面</title>
 
 <!-- 调用CSS，JS -->
-<link href="/travel_agency/admin/images/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript"
+	src="/travel_agency/js/jquery-3.3.1.min.js"></script>
+<link href="/travel_agency/admin/images/style.css" rel="stylesheet"
+	type="text/css" />
 <style type="text/css">
 <!--
 body {
@@ -18,8 +27,9 @@ body {
 	font-family: "宋体";
 	font-size: 12px;
 	color: #333333;
-	background-color: ;
+	background-color:;
 }
+
 .STYLE1 {
 	color: #333333;
 	font-size: x-large;
@@ -75,55 +85,61 @@ c.innerHTML=no;
 <script type="text/javascript" src="../js/verfyUtil.js" charset="gbk"></script>
 </head>
 <body>
-					<form  name="f1" method="post" action="user!login" target="_top" onsubmit="return ck()" enctype="multipart/form-data">
-				
-						<table width="100%" border="0" cellpadding="0" cellspacing="1" bgcolor="#BBD3EB">
-                          	<tr>
-                            	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">用户名</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="userName" name="userName"/></td>
-    						</tr>
-                            <tr>
-                            	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">密码</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="userPass" name="userPass"/></td>
-    						</tr>
-    						<tr>
-    							<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF"></td>
-    							<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="submit" value="提交"/><input type="reset" value="重置"/></td>
-    						</tr>
-                            <script type="text/javascript">
-                            function ck(){
-                            /*
-                            	if(f1.guideName.value==""){
-                            		alert("姓名不能为空");
-                            		return false;
-                            	}
-                            	
-                            	//身份证号校验
-                            	if(isIdCardNo()==false) return false;
-                            	//alert('ff');
-                            	
-                            	if(isTel(f1.phoneNumber)==false&&isMobile(f1.phoneNumber)==false)
-                            	{
-                            	   //alert('ccc');
-                            	   alert('请输入正确的电话号码或手机号:电话号码格式为国家代码(2到3位)-区号(2到3位)-电话号码(7到8位)-分机号(3位)"');
-                            	   return false;
-                            	}else
-                            	{
-                            	   //alert('ddd');
-                            	}
-                            	*/
-                            }
+	<form id="f1" name="f1" method="post" action="login.do" target="_top">
 
-<%
-String suc = (String)request.getAttribute("suc");
-if(suc!=null)
-{
- %>
- alert("操作成功");
-location.replace("/travel_agency/index.jsp");
- <%}%>
-                            </script>
-</table>      
-</form>                 
+		<table width="100%" border="0" cellpadding="0" cellspacing="1"
+			bgcolor="#BBD3EB">
+			<tr>
+				<td height="27" align="center"
+					background="/travel_agency/admin/images/index1_72.gif"
+					bgcolor="#FFFFFF">用户名</td>
+				<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text"
+					id="name" name="name" /></td>
+			</tr>
+			<tr>
+				<td height="27" align="center"
+					background="/travel_agency/admin/images/index1_72.gif"
+					bgcolor="#FFFFFF">密码</td>
+				<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="password"
+					id="password" name="password" /></td>
+			</tr>
+			<tr>
+				<td height="27" align="center"
+					background="/travel_agency/admin/images/index1_72.gif"
+					bgcolor="#FFFFFF"></td>
+				<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="button"
+					value="提交" onclick="return ChHECKLOGIN()" /><input type="reset" value="重置" /></td>
+			</tr>
+			<script type="text/javascript">
+                            function ChHECKLOGIN(){
+                            	var data = $("#f1").serialize();
+                        		$.ajax({
+                        			type: "POST",
+                                    url: "${pageContext.request.contextPath}/checklogin.do",
+                                    dataType: "json",//预期服务器返回的数据类型
+                                    data: data,
+                                    processData:false,
+                                    async:false,
+                                    contentType:"application/x-www-form-urlencoded",
+                                    success: function (result) {
+                                        console.log(result);
+                                        if (result.message == "true") {
+                                            alert("登录成功！");
+                                            document.getElementById("f1").submit();
+                                        }
+                                        else if(result.message == "false"){
+                                        	alert("密码错误！");
+                                        }
+                                        else{
+                                        	alert("登录失败！");
+                                        }
+                                    },
+                                    error: function() {
+                                    }
+                                });
+                            }
+			</script>
+		</table>
+	</form>
 </body>
 </html>
