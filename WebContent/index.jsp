@@ -92,7 +92,7 @@ else{
 		        	<a href="${pageContext.request.contextPath }/getUser.do?id=${user.id }&grand=1" class="font2" target="main"><strong>&nbsp;&nbsp;当前登录：<%=user.getName() %> |</strong></a>
 		        	<a href="index.jsp"  class="font2" target="_top"><strong>&nbsp;&nbsp;退出</strong></a>
 		        	<%}else{ %>
-		        	<a href="register.jsp" class="font2" target="main"><strong>&nbsp;&nbsp;注册</strong></a>&nbsp;
+		        	<a href="userAdd.jsp" class="font2" target="main"><strong>&nbsp;&nbsp;注册</strong></a>&nbsp;
 					<a href="login.jsp" class="font2" target="main"><strong>&nbsp;&nbsp;登录</strong></a>&nbsp;
 				<%} %>
             	</td>

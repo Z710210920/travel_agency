@@ -94,6 +94,10 @@ public class postController {
 	@RequestMapping(value = "/getallpost.do", method = RequestMethod.GET)
 	public ModelAndView getallpost(String userName) {
 		String isadmin;
+		if(userName.equals("")) {
+			ModelAndView mav = new ModelAndView("login.jsp");
+			return mav;
+		}
 		if(userName.equals("admin")) {
 			isadmin = "admin/";
 		}

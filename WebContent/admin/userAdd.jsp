@@ -92,35 +92,38 @@ c.innerHTML=no;
     						</tr>
                          	<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">密码</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="password" name="password" value = ""/></td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="password" id="password" name="password" value = ""/></td>
     						</tr>
                      		<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">性别</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="sex" name="sex" value=""/>只允许输入数字</td>
+								<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp; 
+									<input type="radio" id="sex" name="sex" value="男" checked />男 
+									<input type="radio" id="sex" name="sex" value="女" />女
+								</td>
     						</tr>
     						<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">省份</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="province" name="province" value=""/>只允许输入数字</td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="province" name="province" value=""/></td>
     						</tr>
     						<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">城市</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="city" name="city" value=""/>只允许输入数字</td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="city" name="city" value=""/></td>
     						</tr>
     						<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">住址</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="address" name="address" value=""/>只允许输入数字</td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="address" name="address" value=""/></td>
     						</tr>
     						<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">电话</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="phone" name="phone" value=""/>只允许输入数字</td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="phone" name="phone" value=""/>只允许输入11位数字</td>
     						</tr>
     						<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">身份证号</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="idnumber" name="idnumber" value=""/>只允许输入数字</td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="idnumber" name="idnumber" value=""/></td>
     						</tr>				
     						<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">朋友电话</td>
-                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="frPhoneNunber" name="frPhoneNunber" value=""/>只允许输入数字</td>
+                            	<td bgcolor="#FFFFFF">&nbsp;&nbsp;&nbsp;<input type="text" id="frPhoneNunber" name="frPhoneNunber" value=""/>只允许输入11位数字</td>
     						</tr>	
     						<tr>
                             	<td height="27" align="center" background="/travel_agency/admin/images/index1_72.gif" bgcolor="#FFFFFF">用户类型</td>
@@ -136,7 +139,48 @@ c.innerHTML=no;
     						</tr>
                             <script type="text/javascript">
                             function ADDUSER() {
-                            	var data = $("#f1").serialize();
+                            	var data = $("#f1").serialize()
+                            	var id = document.getElementById("idnumber"); 
+                            	var name = document.getElementById("name");
+                            	var sex = document.getElementById("sex");
+                            	var password = document.getElementById("password");
+                            	var province = document.getElementById("province");
+                            	var city = document.getElementById("city");
+                            	var address = document.getElementById("address");
+                            	var phone = document.getElementById("phone");
+                            	var frPhoneNunber = document.getElementById("frPhoneNunber");
+                				if(name.value.length > 6 || name.value.length < 2){
+                					alert("用户名长度异常！");
+                					return false;
+                				}
+                				else if(password.value.length < 6 || password.value.length> 18){
+                					alert("密码长度异常！");
+                					return false;
+                				}
+                				else if(province.value.length == ""){
+                					alert("请填写省份！");
+                					return false;
+                				}
+                				else if(city.value.length == ""){
+                					alert("请填写城市！");
+                					return false;
+                				}
+                				else if(address.value == ""){
+                					alert("请填写住址！");
+                					return false;
+                				}
+                				else if(!(/^1[3456789]\d{9}$/.test(phone.value))){ 
+                			        alert("手机号码有误，请重填");  
+                			        return false; 
+                			    }
+                				else if(!(/^1[3456789]\d{9}$/.test(frPhoneNunber.value))){
+                					alert("手机号码有误，请重填");  
+                			        return false; 
+                				}
+            					if (id.value.length != 15&&id.value.length != 18) {
+            						alert("身份证有误，请重填");  
+                			        return false; 
+            					}
                                 $.ajax({
                                     type: "POST",
                                     url: "${pageContext.request.contextPath}/userAdd.do",
