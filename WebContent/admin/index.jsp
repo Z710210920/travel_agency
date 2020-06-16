@@ -195,9 +195,9 @@ String roletype="管理员";//替换user.getRole().equals("用户")
                       <td align="center"></td>
                       <td>
                         <table width="100%" border="0" cellspacing="5" cellpadding="0">
-                          <tr onClick="change('业务员管理 > 业务员列表')" style="cursor: hand" >
+                          <tr onClick="change('业务员管理 > 业务员管理')" style="cursor: hand" >
                             <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
-                            <td width="82%"><a href="salesman_MGT.jsp" target="main">业务员列表</a></td>
+                            <td width="82%"><a href="salesmanList.do" target="main">业务员列表</a></td>
                           </tr>
                    
                         </table>

@@ -132,7 +132,7 @@ else{
                    			<%if(user!=null){ %>	    	   
 				        		<tr onClick="change('旅行管理 > 旅行路线')" style="cursor: hand" >
                             <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
-                            <td width="82%"><s:if test=""></s:if><a href="toursRoute!routeList1" target="main">旅行路线</a></td>
+                            <td width="82%"><a href="toursRoute!routeList1" target="main">旅行路线</a></td>
                           </tr>
                           
                           <tr onClick="change('旅行管理 > 导游信息')" style="cursor: hand" >
@@ -147,16 +147,7 @@ else{
 				        	<%}else{ %>
 				        		<tr onClick="change('旅行管理 > 旅行路线')" style="cursor: hand" >
                             <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
-                            <td width="82%"><s:if test=""></s:if><a href="user!login1.action" target="main">旅行路线</a></td>
-                          </tr>
-                          
-                          <tr onClick="change('旅行管理 > 导游信息')" style="cursor: hand" >
-                            <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
-                            <td width="82%"><a href="user!login1.action" target="main">导游信息</a></td>
-                          </tr>
-                          <tr onClick="change('旅行管理 > 订单查询')" style="cursor: hand" >
-                            <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
-                            <td width="82%"><a href="user!login1.action" target="main">订单查询</a></td>
+                            <td width="82%"><a href="user!login1.action" target="main">旅行路线</a></td>
                           </tr>
 							<%} %>
                           <tr onClick="change('旅行管理 > 旅行论坛')" style="cursor: hand" >
@@ -166,7 +157,20 @@ else{
                         </table>
                       </td>
                     </tr>
-                    <% }%>     
+                    <% }else{%>
+                    	<tr onClick="change('旅行管理 > 旅行路线')" style="cursor: hand" >
+                            <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
+                            <td width="82%"><a href="user!login1.action" target="main">旅行路线</a></td>
+                          </tr>
+                          <tr onClick="change('销售管理 > 业绩管理')" style="cursor: hand" >
+                            <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
+                            <td width="82%"><a href="salesman.do?id=${user.id}" target="main">业绩管理</a></td>
+                          </tr>
+                          <tr onClick="change('旅行管理 > 旅行论坛')" style="cursor: hand" >
+                            <td width="18%" align="center"><img src="/travel_agency/admin/images/index1_68.gif" width="11" height="14" /></td>
+                            <td width="82%"><a href="getallpost.do?userName=${user.name}" target="main">旅行论坛</a></td>
+                          </tr>
+                    <%} %>
                   </table>
                 </td>
                 <td background="/travel_agency/admin/images/index1_47.gif"></td>
